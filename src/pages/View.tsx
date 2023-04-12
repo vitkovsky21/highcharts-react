@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import StartSpinner from '../components/StartSpinner';
+import StartSpinner from "../components/StartSpinner";
+
+import HighchartsReact from "highcharts-react-official";
+import Highcharts from "highcharts";
 
 import {
   Table,
@@ -21,31 +24,28 @@ import {
   DialogTitle,
   TextField,
 } from "@mui/material";
-import { useGetChartQuery } from "../services/chartApi";
+import { useGetChartQuery, usePostChartMutation } from "../services/chartApi";
 
 function ViewPage() {
   const isLoading = false;
   const navigate = useNavigate();
 
-  let { data: chartData } = useGetChartQuery();
+  let { data: chartsData } = useGetChartQuery();
+  const [addChartData] = usePostChartMutation();
 
-  if (isLoading && !chartData) {
+  if (isLoading || !chartsData) {
     return <StartSpinner />;
   }
 
-  console.log(chartData)
+  console.log(chartsData);
 
   return (
-  <div>
-    <Card>
-      <div>1</div>
-    </Card>
-    <Card>
-      <div>2</div>
-    </Card>
-  </div>
-  )
-  
+    <div>
+      <Card>
+        <HighchartsReact highcharts={Highcharts} options={chartsData[0]} />
+      </Card>
+    </div>
+  );
 }
 
 export default ViewPage;

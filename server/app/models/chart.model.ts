@@ -32,7 +32,7 @@ export interface IChart {
   date?: Date;
 }
 
-const { STRING, JSON, INTEGER } = DataType;
+const { JSON } = DataType;
 
 export const ChartModel: ModelAttributes<Model, IChart> = {
   chart: {
@@ -60,11 +60,11 @@ export const ChartModel: ModelAttributes<Model, IChart> = {
     allowNull: false,
   },
   plotOptions: {
-    type: STRING,
+    type: JSON,
     allowNull: false,
   },
   series: {
-    type: ARRAY(INTEGER),
+    type: ARRAY(JSON),
     allowNull: false,
   },
   date: {

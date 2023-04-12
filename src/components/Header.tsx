@@ -34,7 +34,7 @@ export default function Header(props: Props) {
 
   const navigate = useNavigate();
 
-  const navigateTo = (item: any) => {s
+  const navigateTo = (item: any) => {
     if (item == "View") {
       navigate(`/`);
     } else {
@@ -61,7 +61,7 @@ export default function Header(props: Props) {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", height: "100px" }}>
       <CssBaseline />
       <AppBar component="nav">
         <Toolbar>
