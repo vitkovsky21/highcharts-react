@@ -1,7 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 import ViewPage from "../pages/View";
 import ErrorBoundary from "./ErrorBoundary";
-import { VIEW_URL } from "../utils/constants";
+import { SETTINGS_URL, VIEW_URL } from "../utils/constants";
+import SettingsPage from "../pages/Settings";
 
 const RootRouter = () => {
   return (
@@ -9,6 +10,7 @@ const RootRouter = () => {
       <ErrorBoundary>
         <Routes>
           <Route path={VIEW_URL} element={<ViewPage />} />
+          <Route path={SETTINGS_URL} element={<SettingsPage />} />
         </Routes>
       </ErrorBoundary>
     </>

@@ -1,45 +1,34 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-
-import StartSpinner from "../components/StartSpinner";
-
-import HighchartsReact from "highcharts-react-official";
-import Highcharts from "highcharts";
-
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { DateRange, LocalizationProvider } from "@mui/x-date-pickers-pro";
 import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
-
-import {
-  Table,
-  Box,
-  Card,
-  TableContainer,
-  Typography,
-  TableRow,
-  TableCell,
-  TableHead,
-  TableBody,
-  Paper,
-  Button,
-  DialogActions,
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  TextField,
-} from "@mui/material";
+import { Card } from "@mui/material";
 import { useGetChartQuery, usePostChartMutation } from "../services/chartApi";
+import { makeStyles } from "@mui/styles";
+
+import StartSpinner from "../components/StartSpinner";
+import HighchartsReact from "highcharts-react-official";
+import Highcharts from "highcharts";
 import options from "../shared/Options";
+
+const useStyles: any = makeStyles({
+  card: {
+    marginTop: "50px",
+    display: "flex",
+    justifyContent: "center",
+    flexWrap: "wrap",
+  },
+});
 
 function ViewPage() {
   let isLoading = true;
   let filteredCharts: any[] = [];
-
   let { data: chartsData } = useGetChartQuery();
-  const [addChartData] = usePostChartMutation();
 
+  const [addChartData] = usePostChartMutation();
   const [value, setValue] = useState<DateRange<Date>>([null, null]);
+  const classes = useStyles();
 
   const addChart = () => {
     addChartData(options);
@@ -49,6 +38,7 @@ function ViewPage() {
   if (!chartsData) {
     return <StartSpinner />;
   }
+
   if (isLoading && chartsData.length < 1) {
     return (
       <div onClick={addChart}>
@@ -62,7 +52,7 @@ function ViewPage() {
       return (
         // @ts-ignore
         chart.date >= value[0]?.toJSON() &&
-        // @ts-ignores
+        // @ts-ignore
         chart.date <= value[1]?.toJSON()
       );
     });
@@ -70,7 +60,9 @@ function ViewPage() {
     filteredCharts = chartsData;
   }
 
-  console.log(filteredCharts);
+  let sortedData = [...filteredCharts].sort((a: any, b: any) => {
+    return new Date(a.date).valueOf() - new Date(b.date).valueOf();
+  });
 
   return (
     <div>
@@ -85,12 +77,12 @@ function ViewPage() {
           />
         </DemoContainer>
       </LocalizationProvider>
-      <Card>
-        {filteredCharts &&
-          !!filteredCharts.length &&
-          filteredCharts.map((chart: any) => (
+      <Card onClick={addChart} className={classes.card}>
+        {sortedData &&
+          !!sortedData.length &&
+          sortedData.map((chart: any) => (
             <HighchartsReact
-              key={chart.chart}
+              key={chart.id}
               highcharts={Highcharts}
               options={chart}
             />
