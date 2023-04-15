@@ -27,7 +27,7 @@ export const chartApi = createApi({
     }),
     updateChart: builder.mutation({
       query: (payload) => ({
-        url: `/chart/${payload.chart}`,
+        url: `/chart/${payload.id}`,
         method: "PUT",
         body: payload,
       }),

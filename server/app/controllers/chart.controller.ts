@@ -73,10 +73,10 @@ export const findAll = (_: Request, res: Response) => {
 };
 
 export const update = (req: Request, res: Response) => {
-  const chart = req.params.chart;
+  const id = req.params.id;
 
   Chart.update(req.body, {
-    where: { chart: chart },
+    where: { id: id },
   })
     .then((num) => {
       if (num) {
@@ -91,7 +91,7 @@ export const update = (req: Request, res: Response) => {
     })
     .catch(() => {
       res.status(500).send({
-        message: "Error updating Tutorial with id=" + chart,
+        message: "Error updating Tutorial with id=" + id,
       });
     });
 };
