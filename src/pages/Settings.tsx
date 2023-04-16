@@ -73,14 +73,8 @@ function SettingsPage() {
   const [type, setType] = useState("");
   const [error, setError] = useState("");
 
-  const addChart = () => {
-    addChartData(options);
-    isLoading = false;
-  };
-
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
+    // e.preventDefault(); - не стал использовать
     const postSubmit = options;
 
     postSubmit.title.text = (e.currentTarget[0] as HTMLInputElement).value;
@@ -91,8 +85,7 @@ function SettingsPage() {
   };
 
   const submitChangeData = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
+    // e.preventDefault(); - не стал использовать
     let putSubmit = JSON.parse(JSON.stringify(chartObj));
 
     putSubmit.title.text = (e.currentTarget[0] as HTMLInputElement).value;
@@ -104,14 +97,6 @@ function SettingsPage() {
 
   if (!chartsData) {
     return <StartSpinner />;
-  }
-
-  if (isLoading && chartsData.length < 1) {
-    return (
-      <div onClick={addChart}>
-        <StartSpinner />
-      </div>
-    );
   }
 
   let sortedData = [...chartsData].sort((a: any, b: any) => {
@@ -278,7 +263,7 @@ function SettingsPage() {
             <div key={chart.id}>
               <Typography
                 onClick={() => {
-                  setChartObj({...chart})
+                  setChartObj({ ...chart });
                   setToggler(true);
                   handleOpen();
                 }}

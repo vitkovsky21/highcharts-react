@@ -3,7 +3,7 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { DateRange, LocalizationProvider } from "@mui/x-date-pickers-pro";
 import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
-import { Card } from "@mui/material";
+import { Card, Typography } from "@mui/material";
 import { useGetChartQuery, usePostChartMutation } from "../services/chartApi";
 import { makeStyles } from "@mui/styles";
 
@@ -30,19 +30,14 @@ function ViewPage() {
   const [value, setValue] = useState<DateRange<Date>>([null, null]);
   const classes = useStyles();
 
-  const addChart = () => {
-    addChartData(options);
-    isLoading = false;
-  };
-
   if (!chartsData) {
     return <StartSpinner />;
   }
 
   if (isLoading && chartsData.length < 1) {
     return (
-      <div onClick={addChart}>
-        <StartSpinner />
+      <div>
+        <Typography>You don't have charts yet.</Typography>
       </div>
     );
   }
@@ -77,7 +72,7 @@ function ViewPage() {
           />
         </DemoContainer>
       </LocalizationProvider>
-      <Card onClick={addChart} className={classes.card}>
+      <Card className={classes.card}>
         {sortedData &&
           !!sortedData.length &&
           sortedData.map((chart: any) => (
