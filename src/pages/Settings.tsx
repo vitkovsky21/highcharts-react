@@ -83,7 +83,7 @@ function SettingsPage() {
   };
 
   const submitChangeData = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); // - не стал использовать
+    // e.preventDefault();  - не стал использовать
     let putSubmit = JSON.parse(JSON.stringify(chartObj));
 
     putSubmit.title.text = (e.currentTarget[0] as HTMLInputElement).value;
