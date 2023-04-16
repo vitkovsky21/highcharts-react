@@ -4,13 +4,12 @@ import { DateRange, LocalizationProvider } from "@mui/x-date-pickers-pro";
 import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
 import { DateRangePicker } from "@mui/x-date-pickers-pro/DateRangePicker";
 import { Card, Typography } from "@mui/material";
-import { useGetChartQuery, usePostChartMutation } from "../services/chartApi";
+import { useGetChartQuery } from "../services/chartApi";
 import { makeStyles } from "@mui/styles";
 
 import StartSpinner from "../components/StartSpinner";
 import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts";
-import options from "../shared/Options";
 
 const useStyles: any = makeStyles({
   card: {
@@ -26,7 +25,6 @@ function ViewPage() {
   let filteredCharts: any[] = [];
   let { data: chartsData } = useGetChartQuery();
 
-  const [addChartData] = usePostChartMutation();
   const [value, setValue] = useState<DateRange<Date>>([null, null]);
   const classes = useStyles();
 

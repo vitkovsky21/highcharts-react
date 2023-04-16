@@ -51,7 +51,6 @@ const btn = {
 };
 
 function SettingsPage() {
-  let isLoading = true;
   let { data: chartsData } = useGetChartQuery();
 
   const [addChartData] = usePostChartMutation();
@@ -71,7 +70,6 @@ function SettingsPage() {
   const [dates, setDates] = useState("");
   const [color, setColor] = useState("");
   const [type, setType] = useState("");
-  const [error, setError] = useState("");
 
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
     // e.preventDefault(); - не стал использовать
@@ -85,12 +83,12 @@ function SettingsPage() {
   };
 
   const submitChangeData = (e: React.FormEvent<HTMLFormElement>) => {
-    // e.preventDefault(); - не стал использовать
+    e.preventDefault(); // - не стал использовать
     let putSubmit = JSON.parse(JSON.stringify(chartObj));
 
     putSubmit.title.text = (e.currentTarget[0] as HTMLInputElement).value;
     putSubmit.chart.type = (e.currentTarget[2] as HTMLInputElement).value;
-    putSubmit.color = (e.currentTarget[4] as HTMLInputElement).value;
+    putSubmit.chart.style.color = (e.currentTarget[4] as HTMLInputElement).value;
 
     changeChartData(putSubmit);
   };
@@ -168,11 +166,6 @@ function SettingsPage() {
                 margin="normal"
                 fullWidth
               />
-              {error && (
-                <Typography className={classes.err} variant="h6">
-                  {error || "Ошибка!"}
-                </Typography>
-              )}
               <Button
                 type="submit"
                 fullWidth
@@ -238,11 +231,6 @@ function SettingsPage() {
                 margin="normal"
                 fullWidth
               />
-              {error && (
-                <Typography className={classes.err} variant="h6">
-                  {error || "Ошибка!"}
-                </Typography>
-              )}
               <Button
                 type="submit"
                 fullWidth

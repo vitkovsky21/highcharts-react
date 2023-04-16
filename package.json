@@ -35,6 +35,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "install:server": "cd ./server && npm install --force",
+    "install:client": "npm install --force",
+    "dev:server": "npm run dev --prefix ./server",
+    "dev:client": "react-scripts start",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

@@ -4,6 +4,9 @@ import { Chart } from "../../db";
 
 type Chart = {
   chart?: {
+    style: {
+      color: string;
+    };
     type: string;
   };
   credits?: {
@@ -29,6 +32,7 @@ type Chart = {
       stacking: string;
     };
   };
+  colors: string;
   series?: any[];
   date?: Date;
 };
@@ -43,8 +47,9 @@ export const create = (req: Request, res: Response) => {
     yAxis: req.body.yAxis,
     legend: req.body.legend,
     plotOptions: req.body.plotOptions,
+    colors: req.body.colors,
     series: req.body.series,
-    date: req.body.date
+    date: req.body.date,
   };
 
   Chart.create(chart)

@@ -19,7 +19,7 @@ const sequelizeOptions: SequelizeOptions = {
   export async function connect() {
     try {
       await sequelize.authenticate();
-      await sequelize.sync({ force: true });
+      await sequelize.sync({ force: true }); // force: true создает пустую таблицу при запуске сервера.
       console.log('Connected to db');
     } catch (err) {
       console.error("Can't connect to db: ", err);

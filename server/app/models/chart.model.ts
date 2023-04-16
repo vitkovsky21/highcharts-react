@@ -3,6 +3,9 @@ import { DataType, Model } from "sequelize-typescript";
 
 export interface IChart {
   chart?: {
+    style: {
+      color: string;
+    }
     type: string;
   };
   credits?: {
@@ -28,11 +31,12 @@ export interface IChart {
       stacking: string;
     };
   };
+  colors?: string;
   series?: any[];
   date?: Date;
 }
 
-const { JSON } = DataType;
+const { JSON, STRING } = DataType;
 
 export const ChartModel: ModelAttributes<Model, IChart> = {
   chart: {
@@ -66,6 +70,10 @@ export const ChartModel: ModelAttributes<Model, IChart> = {
   series: {
     type: ARRAY(JSON),
     allowNull: false,
+  },
+  colors: {
+    type: STRING,
+    allowNull: true
   },
   date: {
     type: DATE,

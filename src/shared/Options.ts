@@ -1,5 +1,8 @@
 const options = {
   chart: {
+    style: {
+      color: "#96ed89"
+    },
     type: "column",
   },
   credits: {
@@ -29,7 +32,6 @@ const options = {
       },
     },
   },
-  color: "#E82C0C",
   series: [
     {
       name: "Browsers",

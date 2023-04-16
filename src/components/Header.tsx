@@ -35,7 +35,7 @@ export default function Header(props: Props) {
   const navigate = useNavigate();
 
   const navigateTo = (item: any) => {
-    if (item == "View") {
+    if (item === "View") {
       navigate(`/`);
     } else {
       navigate(`/${item.toLowerCase()}`);
